@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(norlab_icp_mapper_backup)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -10,10 +10,12 @@ project(norlab_icp_mapper_backup)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   sensor_msgs
+  nav_msgs
+  libpointmatcher_ros
 )
 
 ## System dependencies are found with CMake's conventions
-# find_package(Boost REQUIRED COMPONENTS system)
+find_package(libpointmatcher REQUIRED)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -117,6 +119,7 @@ catkin_package(
 include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
+  ${libpointmatcher_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -147,6 +150,7 @@ add_executable(${PROJECT_NAME}_node src/main.cpp)
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_node
   ${catkin_LIBRARIES}
+  ${libpointmatcher_LIBRARIES}
 )
 
 #############

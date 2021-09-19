@@ -37,3 +37,5 @@ fi
 rosparam set /mapper_node/initial_map_file_name "$MAP_TO_LOAD"
 rosparam set /mapper_node/initial_robot_pose "`echo $LOCALIZATION_TO_LOAD`"
 $HOME/getIcp.sh
+rosparam delete /mapper_node/initial_map_file_name
+rosparam delete /mapper_node/initial_robot_pose

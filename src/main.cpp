@@ -79,8 +79,8 @@ std::map<uint64_t , std::string> retrieveLocalizationFileTimeStamps()
 
 void removeOldFiles(const std::map<uint64_t, std::string>& files)
 {
-	int currentMapFileIndex = 0;
-	for(auto it = files.begin(); currentMapFileIndex < files.size() - 2; ++it)
+	unsigned currentMapFileIndex = 2; // we don't want to delete the two newest files
+	for(auto it = files.begin(); currentMapFileIndex < files.size(); ++it)
 	{
 		std::remove(it->second.c_str());
 		++currentMapFileIndex;

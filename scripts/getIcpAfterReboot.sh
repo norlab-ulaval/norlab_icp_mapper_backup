@@ -1,7 +1,5 @@
 #! /bin/bash
 
-source "$HOME/.rosrc"
-
 ROS_FOLDER="$HOME/.ros/"
 
 MAP_FILES=($(ls -alvr $ROS_FOLDER | grep 'backup_map_' | awk -F':[0-9]* ' '/:/{print $2}'))
@@ -36,4 +34,6 @@ else
   LOCALIZATION_TO_LOAD=`cat $ROS_FOLDER${LOCALIZATION_FILES[1]}`
 fi
 
-getIcp initial_map_file_name:="$MAP_TO_LOAD" initial_robot_pose:="`echo $LOCALIZATION_TO_LOAD`"
+rosparam set /mapper_node/initial_map_file_name "$MAP_TO_LOAD"
+rosparam set /mapper_node/initial_robot_pose "`echo $LOCALIZATION_TO_LOAD`"
+$HOME/getIcp.sh

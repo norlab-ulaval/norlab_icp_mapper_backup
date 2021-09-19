@@ -1,7 +1,6 @@
 #! /bin/bash
 
-source /home/robot/workspace/cras_subt/devel/setup.bash
-source /home/robot/workspace/mapper_ws/devel/setup.bash --extend
+source "$HOME/.rosrc"
 
 ROS_FOLDER="$HOME/.ros/"
 
@@ -37,5 +36,4 @@ else
   LOCALIZATION_TO_LOAD=`cat $ROS_FOLDER${LOCALIZATION_FILES[1]}`
 fi
 
-roslaunch marmotte_mapping realtime_mapping.launch initial_map_file_name:="$MAP_TO_LOAD" initial_robot_pose:="`echo $LOCALIZATION_TO_LOAD`"
-#roslaunch nifti_mapping_launchers norlab_mapper_ouster.launch initial_map_file_name:="$MAP_TO_LOAD" initial_robot_pose:="`echo $LOCALIZATION_TO_LOAD`"
+getIcp initial_map_file_name:="$MAP_TO_LOAD" initial_robot_pose:="`echo $LOCALIZATION_TO_LOAD`"
